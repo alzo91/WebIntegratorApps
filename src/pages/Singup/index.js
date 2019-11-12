@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Checkbox from '@material-ui/core/Checkbox';
 import { Container, Form, Button } from './styles';
 import { FaEnvelope, FaEye, FaEyeSlash, FaAppStore } from 'react-icons/fa';
 
@@ -7,7 +7,7 @@ export default function Singup() {
   const [email, setEmail] = useState('');
   const [confMail, setConfMail] = useState('');
   const [passw, setPassw] = useState('');
-
+  const [chkManager, setManager] = useState(false);
   const [seePass, setSeePass] = useState(false);
 
   return (
@@ -64,10 +64,17 @@ export default function Singup() {
             />
           )}
         </div>
-        <p>
-          Solcitar acesso como gerenciador?
-          <input type="checkbox" value={false} />
-        </p>
+        <div>
+          <Checkbox
+            color="primary"
+            checked={chkManager}
+            onClick={e => setManager(!chkManager)}
+          />
+
+          <p onClick={() => setManager(!chkManager)}>
+            Solcitar acesso como gerenciador ?
+          </p>
+        </div>
 
         <Button>Cadastrar!</Button>
       </Form>

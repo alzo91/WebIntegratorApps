@@ -31,8 +31,14 @@ export const Form = styled.form`
   flex-direction: column;
   div {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    p {
+      margin-left: -10px;
+      font-family: sans-serif;
+      color: #27b0b4;
+    }
+
     label {
       flex: 1;
       background: #c30a04;
@@ -67,6 +73,10 @@ export const Form = styled.form`
     justify-content: flex-start;
     align-items: center;
     margin-top: 10px;
+    &:hover {
+      /* color: #eee; */
+      opacity: 0.5;
+    }
     input {
       margin-bottom: 5px;
       margin-left: 0px;
@@ -85,10 +95,12 @@ export const Button = styled.button.attrs({
   padding: 15px;
   border-radius: 5px;
   margin-top: 10px;
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: bolder;
   &:hover {
     border: 2px solid;
-    border-color: yellowgreen;
-    font-weight: bolder;
+    border-color: #2ad1bd;
   }
 `;
 
@@ -98,6 +110,7 @@ export const Label = styled(Link)`
   justify-content: flex-end;
   color: #0b1235;
   margin-top: 10px;
+
   &:hover {
     color: #eee;
   }

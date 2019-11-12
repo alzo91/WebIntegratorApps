@@ -47,10 +47,13 @@ export const Button = styled.button`
   padding: 15px;
   border-radius: 5px;
   margin-top: 10px;
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: bolder;
   &:hover {
     border: 2px solid;
-    border-color: yellowgreen;
-    font-weight: bolder;
+    border-color: #2ad1bd;
+    /* border-color: yellowgreen; */
   }
 `;
 
@@ -60,7 +63,9 @@ export const Label = styled(Link)`
   justify-content: flex-end;
   color: #0b1235;
   margin-top: 10px;
+  text-decoration: none;
   &:hover {
-    color: #eee;
+    /* color: #eee; */
+    opacity: 0.6;
   }
 `;
