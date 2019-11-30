@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
+import Route from './Route';
 
 import Singin from "../pages/Singin";
 import Singup from "../pages/Singup";
@@ -15,10 +16,10 @@ const Routes = () => (
       <Route exact path="/" component={Singin} />
       <Route exact path="/Singup" component={Singup} />
 
-      <Route exact path="/Dashboard" component={Dashboard} />
-      <Route exact path="/Profile" component={Profile} />
-      <Route exact path="/Application" component={Application} />
-      <Route exact path="/Devices" component={Devices} />
+      <Route exact path="/Dashboard" component={Dashboard} isPrivate/>
+      <Route exact path="/Profile" component={Profile} isPrivate/>
+      <Route exact path="/Application" component={Application} isPrivate/>
+      <Route exact path="/Devices" component={Devices} isPrivate/>
     </Switch>
   </BrowserRouter>
 );
