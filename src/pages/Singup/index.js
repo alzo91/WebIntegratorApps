@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useDispatch,useSelector } from 'react-redux'
 import Checkbox from '@material-ui/core/Checkbox';
 import { Container, Form, Button } from './styles';
 import { FaEnvelope, FaEye, FaEyeSlash, FaAppStore } from 'react-icons/fa';
+import { doSingup } from '../../Store/Actions/fnLogin';
 
 export default function Singup() {
   const [email, setEmail] = useState('');
@@ -10,13 +12,30 @@ export default function Singup() {
   const [chkManager, setManager] = useState(false);
   const [seePass, setSeePass] = useState(false);
 
+  const user = useSelector( state => state.user)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    function info(){
+      console.log(`User info... ${user.loading}`)
+    }
+    info()
+  },[])
+
+  function handleLogin(e){
+    e.preventDefault()
+    console.log('Handle Login')
+    dispatch(doSingup(email ,confMail,passw,chkManager));
+  }
+
   return (
     <Container>
       <h1>
         <FaAppStore />
         Integrator Apps
       </h1>
-      <Form>
+      <h5>{user.loading}</h5>
+      <Form onSubmit={handleLogin}>
         <div>
           <input
             type="email"
