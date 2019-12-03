@@ -1,22 +1,22 @@
-import { call, put, select, delay } from "redux-saga/effects";
-import axios from "axios";
+import { call, put, select, delay } from 'redux-saga/effects';
+import axios from 'axios';
 
 import {
   updtMatricula,
   sendEmails,
-  sendRegistry
-} from "../Actions/fnMatriculas";
+  sendRegistry,
+} from '../Actions/fnMatriculas';
 
-import confUrl from "../../AppConfs/URLs";
+import confUrl from '../../AppConfs/URLs';
 
 const settings = state => state.settings;
 const matriculas = state => state.matriculas;
 
 export function* watching() {
-  console.tron.log("watching");
+  console.tron.log('watching');
   while (true) {
-    let registros = yield select(matriculas);
-    //let { basicAuth } = yield select(settings);
+    const registros = yield select(matriculas);
+    // let { basicAuth } = yield select(settings);
     console.tron.log(`qtd de registros: ${registros.length}`);
     yield* registros.map(function*(obj) {
       if (obj.enviado !== 200 && obj.enviado !== 409) {
@@ -35,33 +35,33 @@ export function* sentRegistry(action) {
   try {
     const { basicAuth, namespace } = yield select(settings);
 
-    let objEnv = {
+    const objEnv = {
       employee: matricula,
       datetime: dataReg,
       picture: base64,
       longitude: objLoc ? objLoc.longitude : 0,
-      latitude: objLoc ? objLoc.latitude : 0
+      latitude: objLoc ? objLoc.latitude : 0,
     };
 
     const resp = yield call(axios.post, confUrl.strURIteste, objEnv, {
-      headers: { Authorization: basicAuth }
+      headers: { Authorization: basicAuth },
     });
 
     if (resp.status === 200 || resp.status === 409) {
-      //fnServices.enviarComprovante(configs.namespace, matricula, dataReg);
+      // fnServices.enviarComprovante(configs.namespace, matricula, dataReg);
       yield put(sendEmails({ matricula, dthrpto: dataReg }));
     }
 
     if (enviado !== resp.status) {
-      yield put(updtMatricula("0", matricula, dataReg, resp.status));
+      yield put(updtMatricula('0', matricula, dataReg, resp.status));
     }
   } catch (err) {
     console.tron.error(err);
-    let [, sts] = err.message.split("code ");
+    let [, sts] = err.message.split('code ');
     sts = !sts ? 500 : +sts;
 
     if (enviado != sts) {
-      yield put(updtMatricula("0", matricula, dataReg, sts));
+      yield put(updtMatricula('0', matricula, dataReg, sts));
     }
   }
 }
@@ -87,33 +87,33 @@ export function* addRegistry(action) {
   try {
     const { basicAuth, namespace } = yield select(settings);
 
-    let objEnv = {
+    const objEnv = {
       employee: matricula,
       datetime: dataReg,
       picture: base64,
       longitude: objLoc ? objLoc.longitude : 0,
-      latitude: objLoc ? objLoc.latitude : 0
+      latitude: objLoc ? objLoc.latitude : 0,
     };
 
     const resp = yield call(axios.post, confUrl.strURIteste, objEnv, {
-      headers: { Authorization: basicAuth }
+      headers: { Authorization: basicAuth },
     });
 
     if (resp.status === 200 || resp.status === 409) {
-      //fnServices.enviarComprovante(configs.namespace, matricula, dataReg);
+      // fnServices.enviarComprovante(configs.namespace, matricula, dataReg);
       yield put(sendEmails({ matricula, dthrpto: dataReg }));
     }
 
     if (enviado !== resp.status) {
-      yield put(updtMatricula("0", matricula, dataReg, resp.status));
+      yield put(updtMatricula('0', matricula, dataReg, resp.status));
     }
   } catch (err) {
     console.tron.error(err);
-    let [, sts] = err.message.split("code ");
+    let [, sts] = err.message.split('code ');
     sts = !sts ? 500 : +sts;
 
     if (enviado !== sts) {
-      yield put(updtMatricula("0", matricula, dataReg, sts));
+      yield put(updtMatricula('0', matricula, dataReg, sts));
     }
   }
 }

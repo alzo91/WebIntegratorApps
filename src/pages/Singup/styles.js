@@ -115,3 +115,9 @@ export const Label = styled(Link)`
     color: #eee;
   }
 `;
+
+export const SlimButton = styled.button`
+  border-style: unset;
+  background-color: unset;
+  font-size: 14px;
+`;

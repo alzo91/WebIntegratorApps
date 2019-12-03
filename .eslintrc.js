@@ -8,7 +8,7 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  parse: 'babel-eslint',
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -19,7 +19,16 @@ module.exports = {
   plugins: ['react', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
-    'react/jsx-filename-extesion': ['warn', { extensions: ['.js', '.jsx'] }],
+    //'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
+    // 'camelcase': [2, {'properties': 'always'},{'ignoreDestructuring': true}],
+    'camelcase': [ 2,
+      { ignoreDestructuring: true,
+        properties: "never",
+        ignoreImports: true,
+        allow: ["conf_mail"]
+      }
+    ],
     'import/prefer-default-export': 'off',
   },
 };

@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from 'react';
-import { useDispatch,useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Container, Form, Button } from './styles';
 import { FaEnvelope, FaEye, FaEyeSlash, FaAppStore } from 'react-icons/fa';
+import { Container, Form, Button, SlimButton } from './styles';
 import { doSingup } from '../../Store/Actions/fnLogin';
 
 export default function Singup() {
@@ -12,20 +12,20 @@ export default function Singup() {
   const [chkManager, setManager] = useState(false);
   const [seePass, setSeePass] = useState(false);
 
-  const user = useSelector( state => state.user)
-  const dispatch = useDispatch()
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    function info(){
-      console.log(`User info... ${user.loading}`)
+  useEffect(() => {
+    function info() {
+      console.log(`User info... ${user.loading}`);
     }
-    info()
-  },[])
+    info();
+  }, [user.loading]);
 
-  function handleLogin(e){
-    e.preventDefault()
-    console.log('Handle Login')
-    dispatch(doSingup(email ,confMail,passw,chkManager));
+  function handleLogin(e) {
+    e.preventDefault();
+    console.log('Handle Login');
+    dispatch(doSingup(email, confMail, passw, chkManager));
   }
 
   return (
@@ -58,7 +58,7 @@ export default function Singup() {
         </div>
         {email !== confMail && (
           <div>
-            <label>* emails não conferem!!</label>
+            <h5>* emails não conferem!!</h5>
           </div>
         )}
         <div>
@@ -87,17 +87,17 @@ export default function Singup() {
           <Checkbox
             color="primary"
             checked={chkManager}
-            onClick={e => setManager(!chkManager)}
+            onClick={() => setManager(!chkManager)}
           />
 
-          <p onClick={() => setManager(!chkManager)}>
+          <SlimButton type="button" onClick={() => setManager(!chkManager)}>
             Solcitar acesso como gerenciador ?
-          </p>
+          </SlimButton>
         </div>
 
         <Button>Cadastrar!</Button>
       </Form>
-      <div></div>
+      <div />
     </Container>
   );
 }

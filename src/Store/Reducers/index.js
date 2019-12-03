@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-import user from './user'
-import devices from './devices'
+import user from './user';
+import devices from './devices';
 
-export default combineReducers({ user, devices })
+export default combineReducers({ user, devices });
