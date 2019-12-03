@@ -25,6 +25,20 @@ export const Container = styled.div`
   }
 `;
 
+export const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: ${props =>
+    props.type === 'center' ? 'center' : 'space-between'};
+  button {
+    width: 0px;
+    height: 0px;
+    border-style: none;
+    background-color: white;
+    color: white;
+  }
+`;
+
 export const Form = styled.form`
   margin-top: 30px;
   display: flex;

@@ -1,9 +1,13 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@material-ui/core/Checkbox';
 import { FaEnvelope, FaEye, FaEyeSlash, FaAppStore } from 'react-icons/fa';
-import { Container, Form, Button, SlimButton } from './styles';
+import { TiArrowLeftOutline } from 'react-icons/ti';
+
+import { Container, Header, Form, Button, SlimButton } from './styles';
 import { doSingup } from '../../Store/Actions/fnLogin';
+import history from '../../services/history';
 
 export default function Singup() {
   const [email, setEmail] = useState('');
@@ -27,14 +31,22 @@ export default function Singup() {
     console.log('Handle Login');
     dispatch(doSingup(email, confMail, passw, chkManager));
   }
-
+  function goBack() {
+    history.goBack();
+  }
   return (
     <Container>
-      <h1>
-        <FaAppStore />
-        Integrator Apps
-      </h1>
-      <h5>{user.loading}</h5>
+      <Header>
+        <TiArrowLeftOutline size={32} onClick={goBack} />
+        <h1>
+          <FaAppStore size={32} />
+          Integrator Apps
+        </h1>
+        <label htmlFor="h1" />
+      </Header>
+      <Header type="center">
+        <h5>{user.loading ? "It's loading" : "It isn't loading"}</h5>
+      </Header>
       <Form onSubmit={handleLogin}>
         <div>
           <input
