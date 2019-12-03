@@ -6,6 +6,7 @@ const initState = {
   manager: false,
   loading: false,
   error: null,
+  typeError: 0 /** 0- valor inicial | 1- info | 2- warning | 3-error */,
 };
 
 export default function user(state = initState, action) {
@@ -18,6 +19,7 @@ export default function user(state = initState, action) {
         ...state,
         loading: action.payload.boolRet,
         error: action.payload.strMsg,
+        type_error: action.payload.type_error,
       };
 
     case typeOfLogins.SINGUP:

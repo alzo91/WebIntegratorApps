@@ -26,7 +26,7 @@ module.exports = {
       { ignoreDestructuring: true,
         properties: "never",
         ignoreImports: true,
-        allow: ["conf_mail"]
+        allow: ["conf_mail","type_error","verify_access"]
       }
     ],
     'import/prefer-default-export': 'off',

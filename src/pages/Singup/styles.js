@@ -27,7 +27,7 @@ export const Container = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${props => (props.type === 'center' ? 'column' : 'row')};
   justify-content: ${props =>
     props.type === 'center' ? 'center' : 'space-between'};
   button {

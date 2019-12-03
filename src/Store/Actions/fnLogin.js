@@ -5,10 +5,10 @@ export const typeOfLogins = {
   PROCESS: 'PROCCESS_REQUEST',
 };
 
-export const doProccess = (boolRet, strMsg) => {
+export const doProccess = (boolRet, strMsg, type_error) => {
   return {
     type: typeOfLogins.PROCESS,
-    payload: { boolRet, strMsg },
+    payload: { boolRet, strMsg, type_error },
   };
 };
 
@@ -19,10 +19,10 @@ export const doLogin = (email, password) => {
   };
 };
 
-export const doSingup = (email, conf_mail, password, chkManager) => {
+export const doSingup = (name, email, conf_mail, password, verify_access) => {
   return {
     type: typeOfLogins.SINGUP,
-    payload: { email, conf_mail, password, chkManager },
+    payload: { name, email, conf_mail, password, verify_access },
   };
 };
 

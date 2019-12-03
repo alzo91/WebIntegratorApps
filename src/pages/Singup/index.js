@@ -2,7 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@material-ui/core/Checkbox';
-import { FaEnvelope, FaEye, FaEyeSlash, FaAppStore } from 'react-icons/fa';
+import {
+  FaEnvelope,
+  FaEye,
+  FaEyeSlash,
+  FaAppStore,
+  FaUserCircle,
+} from 'react-icons/fa';
 import { TiArrowLeftOutline } from 'react-icons/ti';
 
 import { Container, Header, Form, Button, SlimButton } from './styles';
@@ -10,6 +16,7 @@ import { doSingup } from '../../Store/Actions/fnLogin';
 import history from '../../services/history';
 
 export default function Singup() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [confMail, setConfMail] = useState('');
   const [passw, setPassw] = useState('');
@@ -29,7 +36,7 @@ export default function Singup() {
   function handleLogin(e) {
     e.preventDefault();
     console.log('Handle Login');
-    dispatch(doSingup(email, confMail, passw, chkManager));
+    dispatch(doSingup(name, email, confMail, passw, chkManager));
   }
   function goBack() {
     history.goBack();
@@ -46,8 +53,22 @@ export default function Singup() {
       </Header>
       <Header type="center">
         <h5>{user.loading ? "It's loading" : "It isn't loading"}</h5>
+        <h5>{String(user.typeError)}</h5>
+        <h5>{String(user.error)}</h5>
       </Header>
       <Form onSubmit={handleLogin}>
+        <div>
+          <input
+            type="text"
+            minLength={3}
+            maxLength={50}
+            onChange={e => setName(e.target.value)}
+            placeholder="Informe seu nome"
+            value={name}
+            required
+          />
+          <FaUserCircle size={26} color="#4FD3D7" />
+        </div>
         <div>
           <input
             type="email"
