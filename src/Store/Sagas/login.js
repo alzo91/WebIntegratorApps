@@ -16,10 +16,7 @@ export function* registryUser(action) {
     const objEnv = { ...action.payload, manager: false };
     console.log(`obj Envio: ${JSON.stringify(objEnv)}`);
 
-    const response = yield call(api.post, '/CreateUser', objEnv, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: '*/*' },
-    });
+    const response = yield call(api.post, '/CreateUser', objEnv);
 
     // api.post('', objEnv, { method: 'POST',  });
     console.log(`response: ${JSON.stringify(response.data)}`);
