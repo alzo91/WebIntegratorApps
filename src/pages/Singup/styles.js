@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 export const Container = styled.div`
   max-width: 700px;
@@ -100,9 +100,10 @@ export const Form = styled.form`
   }
 `;
 
-export const Button = styled.button.attrs({
+export const Button = styled.button.attrs(props => ({
   type: 'submit',
-})`
+  disable: !!props.loading,
+}))`
   background: #27b0b4;
   color: #fff;
   border: 0;

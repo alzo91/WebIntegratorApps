@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaAppStore } from 'react-icons/fa';
+import { FaAppStore, FaSpinner } from 'react-icons/fa';
 
 import { Container, Form, Button, Label } from './styles';
 import * as LoginActions from '../../Store/Actions/fnLogin';
@@ -23,7 +23,7 @@ export default function Singin() {
         <FaAppStore />
         Integrator Apps
       </h1>
-      <h5>{user.loading === true ? 'esta em verdade' : 'esta falso'}</h5>
+      {/* <h5>{user.loading === true ? 'esta em verdade' : 'esta falso'}</h5> */}
       <Form onSubmit={handleSubimit}>
         <input
           type="email"
@@ -39,7 +39,9 @@ export default function Singin() {
           value={passw}
           required
         />
-        <Button>Acessar</Button>
+        <Button loading={user.loading ? 1 : 0}>
+          {user.loading ? <FaSpinner size={26} color="white" /> : 'Acessar'}
+        </Button>
       </Form>
       <Label to="/Singup">Ainda não possuie acesso, cadastre-se</Label>
     </Container>

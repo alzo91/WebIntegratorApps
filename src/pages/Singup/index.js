@@ -8,6 +8,7 @@ import {
   FaEyeSlash,
   FaAppStore,
   FaUserCircle,
+  FaSpinner,
 } from 'react-icons/fa';
 import { TiArrowLeftOutline } from 'react-icons/ti';
 
@@ -128,7 +129,9 @@ export default function Singup() {
           </SlimButton>
         </div>
 
-        <Button>Cadastrar!</Button>
+        <Button loading={user.loading ? 1 : 0}>
+          {user.loading ? <FaSpinner size={26} color="white" /> : 'Cadastrar!'}
+        </Button>
       </Form>
       <div />
     </Container>

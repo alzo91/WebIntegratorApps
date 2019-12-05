@@ -10,15 +10,15 @@ export default function RouteWrapper({
   ...rest
 }) {
   const [singed, setSinged] = useState(false);
-  const [name, setName] = useState('');
+  // const [name, setName] = useState('');
 
   useEffect(() => {
-    const item = localStorage.getItem('@integrator:singed');
+    const item = localStorage.getItem('@integrator:token_app');
 
     if (item) {
-      const objSinged = JSON.parse(item);
+      // const objSinged = JSON.parse(item);
       setSinged(true);
-      setName(objSinged.name);
+      // setName(objSinged.name);
     }
   }, []);
 
@@ -29,7 +29,7 @@ export default function RouteWrapper({
 
   if (singed && !isPrivate) {
     // console.log('2 ---> ');
-    return <Redirect to={`/dashboard/${name}`} />;
+    return <Redirect to="/Dashboard" />;
   }
   // console.log('3 ---> ');
 

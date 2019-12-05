@@ -11,15 +11,13 @@ import api from '../../services/api';
 export function* registryUser(action) {
   try {
     yield put(LoginActions.doProccess(true, null, 0));
-    // console.log('vamos fazer o processo de cadastro!');
-    // yield delay(1000);
-    const objEnv = { ...action.payload, manager: false };
-    console.log(`obj Envio: ${JSON.stringify(objEnv)}`);
 
+    const objEnv = { ...action.payload, manager: false };
     const response = yield call(api.post, '/CreateUser', objEnv);
 
-    // api.post('', objEnv, { method: 'POST',  });
+    yield delay(4000);
     console.log(`response: ${JSON.stringify(response.data)}`);
+
     yield put(LoginActions.doProccess(false, 'User was resgistryied !', 1));
   } catch (err) {
     console.error(err);
@@ -29,12 +27,17 @@ export function* registryUser(action) {
 
 export function* singinUser(action) {
   try {
-    yield put(LoginActions.doProccess(true, null));
-    console.log('vamos fazer o processo de login no sistema');
-    yield delay(1000);
-    console.log(`valor payload: ${JSON.stringify(action.payload)}`);
-    yield put(LoginActions.doProccess(false, null));
+    yield put(LoginActions.doProccess(true, null, 0));
+
+    const response = yield call(api.post, '/CreateSession', action.payload);
+
+    yield delay(4000);
+
+    localStorage.setItem('@integrator:token_app', response.data.token_app);
+
+    yield put(LoginActions.doProccess(false, 'User logged !', 1));
   } catch (err) {
     console.error(err);
+    yield put(LoginActions.doProccess(false, "User wasn't resgistry!", 3));
   }
 }
