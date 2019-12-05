@@ -52,8 +52,8 @@ export function* singinUser(action) {
     // yield delay(2000);
 
     // yield call(history.push, '/Dashboard');
-    // history.push('Dashboard');
-    // history.go();
+    history.push('Dashboard');
+    history.go();
   } catch (err) {
     console.error(err);
     yield put(LoginActions.doProccess(false, "User wasn't resgistry!", 3));
