@@ -30,6 +30,10 @@ export const Header = styled.div`
   flex-direction: ${props => (props.type === 'center' ? 'column' : 'row')};
   justify-content: ${props =>
     props.type === 'center' ? 'center' : 'space-between'};
+  background-color: ${props => props.typeError === 3 && '#C82C1C'};
+  color: ${props => props.typeError === 3 && '#fff'};
+  border-radius: ${props => props.typeError && '5px'};
+  font-weight: ${props => props.typeError && 'bold'};
   button {
     width: 0px;
     height: 0px;
@@ -100,9 +104,18 @@ export const Form = styled.form`
   }
 `;
 
+export const rotate = keyframes`
+  from{
+    transform: rotate(0deg)
+  }
+  to{
+    transform: rotate(360deg)
+  }
+`;
+
 export const Button = styled.button.attrs(props => ({
   type: 'submit',
-  disable: !!props.loading,
+  disabled: !!props.loading,
 }))`
   background: #27b0b4;
   color: #fff;
@@ -114,9 +127,21 @@ export const Button = styled.button.attrs(props => ({
   font-family: sans-serif;
   font-weight: bolder;
   &:hover {
+    /* opacity: 0.5; */
     border: 2px solid;
     border-color: #2ad1bd;
   }
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  ${props =>
+    props.loading &&
+    css`
+      svg {
+        animation: ${rotate} 2s linear infinite;
+      }
+    `}
 `;
 
 export const Label = styled(Link)`

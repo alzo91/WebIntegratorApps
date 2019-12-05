@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaAppStore, FaSpinner } from 'react-icons/fa';
 
-import { Container, Form, Button, Label } from './styles';
+import { Container, Header, Form, Button, Label } from './styles';
 import * as LoginActions from '../../Store/Actions/fnLogin';
 
 export default function Singin() {
@@ -27,6 +27,8 @@ export default function Singin() {
       <Form onSubmit={handleSubimit}>
         <input
           type="email"
+          minLength={8}
+          maxLength={70}
           placeholder="Usuário para acessar!"
           onChange={e => setEmail(e.target.value)}
           value={email}
@@ -39,6 +41,9 @@ export default function Singin() {
           value={passw}
           required
         />
+        <Header type="center">
+          <h5>{user.error}</h5>
+        </Header>
         <Button loading={user.loading ? 1 : 0}>
           {user.loading ? <FaSpinner size={26} color="white" /> : 'Acessar'}
         </Button>

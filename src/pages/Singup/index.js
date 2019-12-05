@@ -52,12 +52,13 @@ export default function Singup() {
         </h1>
         <label htmlFor="h1" />
       </Header>
-      <Header type="center">
-        <h5>{user.loading ? "It's loading" : "It isn't loading"}</h5>
-        <h5>{String(user.typeError)}</h5>
-        <h5>{String(user.error)}</h5>
-      </Header>
+
       <Form onSubmit={handleLogin}>
+        {user.error && (
+          <Header type="center" typeError={user.type_error}>
+            <h3>{String(user.error)}</h3>
+          </Header>
+        )}
         <div>
           <input
             type="text"
@@ -73,6 +74,8 @@ export default function Singup() {
         <div>
           <input
             type="email"
+            minLength={8}
+            maxLength={70}
             onChange={e => setEmail(e.target.value)}
             placeholder="Informe seu e-mail!"
             value={email}
@@ -83,6 +86,8 @@ export default function Singup() {
         <div>
           <input
             type="email"
+            minLength={8}
+            maxLength={70}
             onChange={e => setConfMail(e.target.value)}
             placeholder="Confirme seu e-mail!"
             value={confMail}
