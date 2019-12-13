@@ -59,3 +59,33 @@ export function* singinUser(action) {
     yield put(LoginActions.doProccess(false, "User wasn't resgistry!", 3));
   }
 }
+
+export function* checkToken(action) {
+  try {
+    yield put(LoginActions.doProccess(true, null, 0));
+
+    const response = yield call(api.post, '/CheckToken', action.payload, {
+      headers: { Authorization: 'Bearer ' + action.payload.token },
+    });
+
+    console.log(response.data);
+    //yield delay(12000);
+
+    //localStorage.setItem('@integrator:token_app', response.data.token_app);
+
+    yield put(LoginActions.doProccess(false, 'Token is valid!', 1));
+
+    // yield delay(2000);
+
+    // yield call(history.push, '/Dashboard');
+    //history.push('Dashboard');
+    //history.go();
+  } catch (err) {
+    console.error(err);
+
+    localStorage.removeItem('@integrator:token_app');
+    history.push('/');
+    history.go();
+    yield put(LoginActions.doProccess(false, 'Token is not valid!', 3));
+  }
+}

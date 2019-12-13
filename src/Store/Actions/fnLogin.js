@@ -3,6 +3,7 @@ export const typeOfLogins = {
   SINGUP: 'SINGUP',
   LOGOUT: 'LOGOUT',
   PROCESS: 'PROCCESS_REQUEST',
+  CHK_TOKEN: 'CHK_TOKEN',
 };
 
 export const doProccess = (boolRet, strMsg, type_error) => {
@@ -23,6 +24,13 @@ export const doSingup = (name, email, conf_mail, password, verify_access) => {
   return {
     type: typeOfLogins.SINGUP,
     payload: { name, email, conf_mail, password, verify_access },
+  };
+};
+
+export const doCheckToken = token => {
+  return {
+    type: typeOfLogins.CHK_TOKEN,
+    payload: { token },
   };
 };
 

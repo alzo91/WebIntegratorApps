@@ -2,8 +2,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-
+import { doCheckToken } from '../Store/Actions/fnLogin';
 export default function RouteWrapper({
   component: Component,
   isPrivate,
@@ -11,12 +12,15 @@ export default function RouteWrapper({
 }) {
   const [singed, setSinged] = useState(false);
   // const [name, setName] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const item = localStorage.getItem('@integrator:token_app');
 
     if (item) {
       // const objSinged = JSON.parse(item);
+      console.log(item);
+      dispatch(doCheckToken(item));
       setSinged(true);
       // setName(objSinged.name);
     }
