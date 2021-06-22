@@ -1,1 +1,1 @@
-yarn start
+serve -s build -l 3006
